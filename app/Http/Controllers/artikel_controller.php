@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\artikel;
+use App\kategori_artikel;
 
 class artikel_controller extends Controller
 {
@@ -12,5 +13,21 @@ class artikel_controller extends Controller
     	$artikel=artikel::all();
 
     	return view('artikel.index', compact('artikel'));
+    }
+    public function show ($id){
+    	$artikel=artikel::find($id);
+    }
+    public function create(){
+
+    	$kategori_artikel=kategori_artikel::pluck('nama', 'id');
+
+    	return view('artikel.create', compact('kategori_artikel'));
+    }
+     public function store(Request $request){
+    	$input= $request->all();
+    	
+    	artikel::create($input);
+
+    	return redirect(route('artikel.index'));
     }
 }

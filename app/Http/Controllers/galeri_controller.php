@@ -13,4 +13,7 @@ class galeri_controller extends Controller
 
     	return view('galeri.index', compact('galeri'));
     }
+    public function show ($id){
+    	$galeri=galeri::find($id);
+    }
 }

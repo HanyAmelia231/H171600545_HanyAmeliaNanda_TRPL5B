@@ -13,4 +13,7 @@ class pengumuman_controller extends Controller
 
     	return view('pengumuman.index', compact('pengumuman'));
     }
+    public function show ($id){
+    	$pengumuman=pengumuman::find($id);
+    }
 }

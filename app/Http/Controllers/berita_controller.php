@@ -13,4 +13,7 @@ class berita_controller extends Controller
 
     	return view('berita.index', compact('berita'));
     }
+    public function show ($id){
+    	$berita=berita::find($id);
+    }
 }
