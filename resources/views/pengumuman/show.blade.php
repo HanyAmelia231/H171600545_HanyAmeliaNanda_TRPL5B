@@ -19,7 +19,7 @@
     <label for="isi" class="col-md-4 col-form-label text-md-right">{{ __('Isi') }}</label>
 
     <div class="col-md-6">
-        <input id="isi" type="text" class="form-control @error('isi') is-invalid @enderror" name="isi" value="{{ old('isi') }}" required autocomplete="isi" autofocus>
+        <input id="isi" type="text" class="form-control @error('isi') is-invalid @enderror" name="phone" value="{{ old('isi') }}" required autocomplete="isi" autofocus>
 
         @error('isi')
             <span class="invalid-feedback" role="alert">

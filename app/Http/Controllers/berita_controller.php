@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\berita;
+use App\kategori_berita;
 
 class berita_controller extends Controller
 {
@@ -15,5 +16,18 @@ class berita_controller extends Controller
     }
     public function show ($id){
     	$berita=berita::find($id);
+    }
+    public function create(){
+
+    	$kategori_berita=kategori_berita::pluck('nama', 'id');
+
+    	return view('berita.create', compact('kategori_berita'));
+    }
+     public function store(Request $request){
+    	$input= $request->all();
+    	
+    	berita::create($input);
+
+    	return redirect(route('berita.index'));
     }
 }
