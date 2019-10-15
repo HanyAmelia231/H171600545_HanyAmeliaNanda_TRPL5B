@@ -18,6 +18,8 @@ class kategori_artikel_controller extends Controller
     }
     public function show ($id){
     	$kategori_artikel=kategori_artikel::find($id);
+
+         return view('kategori_artikel.show', compact('kategori_artikel'));
     }
     public function create(){
     	return view('kategori_artikel.create');

@@ -1,30 +1,46 @@
+@extends('layouts.app')
 
-@csrf
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-center">{{ __('Lihat Kategori Artikel') }}</div>
 
-<div class="form-group row">
-    <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
+                <div class="card-body">
+                    @csrf
 
-    <div class="col-md-6">
-        <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="phone" value="{{ old('nama') }}" required autocomplete="nama" autofocus>
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Nama</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $kategori_artikel->nama }}</label>
+                    </div>
 
-        @error('nama')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Created At</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $kategori_artikel->created_at->format('D, d M Y H:m') }}</label>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Last Updated</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $kategori_artikel->updated_at->format('D, d M Y H:m') }}</label>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Publisher</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $kategori_artikel->users_id }}</label>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-primary" href="{{ route('kategori_artikel.edit', $kategori_artikel->id) }}">Edit</a>
+                            {!! Form::open(['route' => ['kategori_artikel.destroy', $kategori_artikel->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-secondary']) !!}
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="form-group row">
-    <label for="users_id" class="col-md-4 col-form-label text-md-right">{{ __('Users ID') }}</label>
-
-    <div class="col-md-6">
-        <input id="users_id" type="hidden" class="form-control @error('users_id') is-invalid @enderror" name="users_id" required autocomplete="current-password">
-
-        @error('users_id')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>   
-</div>
+@endsection

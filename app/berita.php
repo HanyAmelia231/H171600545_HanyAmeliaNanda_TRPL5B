@@ -9,4 +9,5 @@ class berita extends Model
     //
     protected $fillable= ['judul', 'isi', 'users_id','kategori_berita_id'];
     protected $table= 'berita';
+    protected $dates = ['created_at', 'updated_at'];
 }

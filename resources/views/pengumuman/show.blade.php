@@ -1,44 +1,56 @@
+@extends('layouts.app')
 
-@csrf
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-center">{{ __('Lihat Pengumuman') }}</div>
 
-<div class="form-group row">
-    <label for="judul" class="col-md-4 col-form-label text-md-right">{{ __('Judul') }}</label>
+                <div class="card-body">
+                    @csrf
 
-    <div class="col-md-6">
-        <input id="judul" type="text" class="form-control @error('judul') is-invalid @enderror" name="nama" value="{{ old('judul') }}" required autocomplete="judul" autofocus>
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Judul</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $pengumuman->judul }}</label>
+                    </div>
 
-        @error('judul')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Isi</label>
+                        <span class="col-md-6">{!! $pengumuman->isi !!}</span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Kategori Pengumuman</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $pengumuman->kategori_pengumuman_id }}</label>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Created At</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $pengumuman->created_at->format('D, d M Y H:m') }}</label>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Last Updated</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $pengumuman->updated_at->format('D, d M Y H:m') }}</label>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="artikel" class="col-md-4 col-form-label text-md-right">Publisher</label>
+                        <label for="artikel" class="col-md-6 col-form-label text-md-left">{{ $pengumuman->users_id }}</label>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-primary" href="{{ route('pengumuman.edit', $pengumuman->id) }}">Edit</a>
+                            {!! Form::open(['route' => ['pengumuman.destroy', $pengumuman->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-secondary']) !!}
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="form-group row">
-    <label for="isi" class="col-md-4 col-form-label text-md-right">{{ __('Isi') }}</label>
-
-    <div class="col-md-6">
-        <input id="isi" type="text" class="form-control @error('isi') is-invalid @enderror" name="phone" value="{{ old('isi') }}" required autocomplete="isi" autofocus>
-
-        @error('isi')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>
-
-<div class="form-group row">
-    <label for="users_id" class="col-md-4 col-form-label text-md-right">{{ __('Users ID') }}</label>
-
-    <div class="col-md-6">
-        <input id="users_id" type="hidden" class="form-control @error('users_id') is-invalid @enderror" name="users_id" required autocomplete="current-password">
-
-        @error('users_id')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>   
-</div>
+@endsection

@@ -9,4 +9,5 @@ class galeri extends Model
     //
     protected $fillable= ['nama', 'keterangan', 'path', 'users_id', 'kategori_galeri_id'];
     protected $table= 'galeri';
+    protected $dates = ['created_at', 'updated_at'];
 }

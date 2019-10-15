@@ -15,6 +15,8 @@ class kategori_pengumuman_controller extends Controller
     }
     public function show ($id){
     	$kategori_pengumuman=kategori_pengumuman::find($id);
+
+        return view('kategori_pengumuman.show', compact('kategori_pengumuman'));
     }
     public function create(){
     	return view('kategori_pengumuman.create');
@@ -25,5 +27,30 @@ class kategori_pengumuman_controller extends Controller
     	kategori_pengumuman::create($input);
 
     	return redirect(route('kategori_pengumuman.index'));
+    }
+     public function edit($id){
+        $kategori_pengumuman=kategori_pengumuman::find($id);
+
+        if (empty($kategori_pengumuman)){
+            return redirect(route('kategori_pengumuman.index'));
+        }
+        return view('kategori_pengumuman.edit', compact('kategori_pengumuman'));
+    }
+    public function update(Request $request, $id)
+    {
+        $input= $request->all();
+        
+        kategori_pengumuman::find($id)->update($input);
+
+        return redirect(route('kategori_pengumuman.index'));
+    }
+    public function destroy($id){
+        $kategori_pengumuman=kategori_pengumuman::find($id);
+
+        if (empty($kategori_pengumuman)){
+            return redirect(route('kategori_pengumuman.index'));
+        }
+        $kategori_pengumuman->delete();
+        return redirect(route('kategori_pengumuman.index'));
     }
 }

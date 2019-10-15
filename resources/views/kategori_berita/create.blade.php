@@ -7,13 +7,24 @@
             <div class="card">
                 <div class="card-header">Tambah Kategori Berita</div>
                 <div class="card-body">
-                    <form method="post" action="{!! route('kategori_berita.store') !!}">
-                        @include('kategori_berita.form')
-                    </form>
+                    {!! Form::open(['route' => 'kategori_berita.store', 'method' => 'post']) !!}
+                    @include('kategori_berita.form')
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+
+    <script>
+          $(document).ready(function() {
+            CKEDITOR.replace( 'isi' );
+          });
+    </script>
+  
 @endsection

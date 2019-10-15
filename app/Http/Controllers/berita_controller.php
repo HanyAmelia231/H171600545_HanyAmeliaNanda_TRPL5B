@@ -16,6 +16,8 @@ class berita_controller extends Controller
     }
     public function show ($id){
     	$berita=berita::find($id);
+
+        return view('berita.show', compact('berita'));
     }
     public function create(){
 
@@ -29,5 +31,31 @@ class berita_controller extends Controller
     	berita::create($input);
 
     	return redirect(route('berita.index'));
+    }
+     public function edit($id){
+        $berita=berita::find($id);
+        $kategori_berita=kategori_berita::pluck('nama', 'id');
+
+        if (empty($berita)){
+            return redirect(route('berita.index'));
+        }
+        return view('berita.edit', compact('berita', 'kategori_berita'));
+    }
+    public function update(Request $request, $id)
+    {
+        $input= $request->all();
+        
+        berita::find($id)->update($input);
+
+        return redirect(route('berita.index'));
+    }
+    public function destroy($id){
+        $berita=berita::find($id);
+
+        if (empty($berita)){
+            return redirect(route('berita.index'));
+        }
+        $berita->delete();
+        return redirect(route('berita.index'));
     }
 }
